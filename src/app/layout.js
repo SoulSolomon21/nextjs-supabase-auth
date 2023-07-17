@@ -1,7 +1,18 @@
 import { AuthProvider } from '@/components/AuthProvider';
 import './globals.css'
+import createClient from '@/lib/supabase-server'
+
+export const revalidate = 0
 
 export default async function RootLayout({ children }) {
+  const supabase = createClient()
+
+  const {
+    data: { session }
+  } = await supabase.auth.getSession()
+
+  const accessToken = session?.access_token || null
+
   return (
     <html lang="en">
       <body>
@@ -10,7 +21,7 @@ export default async function RootLayout({ children }) {
             <h1 className="mb-12 text-5xl font-bold sm:text-6xl">
               Next.js with <span className="font-black text-green-400">Supabase</span>
             </h1>
-            <AuthProvider>
+            <AuthProvider accessToken={accessToken}>
               {children}
             </AuthProvider>
           </main>

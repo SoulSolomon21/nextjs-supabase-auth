@@ -30,6 +30,7 @@ export const AuthProvider = (props) => {
   const { accessToken, ...rest } = props;
 
   useEffect(() => {
+
     async function getActiveSession() {
       const {
         data: { session: activeSession },

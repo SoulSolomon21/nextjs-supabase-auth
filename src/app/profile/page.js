@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import createClient from '@/lib/supabase-server'
+import SignOut from "@/components/SignOut";
 
 export default async function Profile() {
   const supabase = createClient()
@@ -23,6 +24,7 @@ export default async function Profile() {
       <Link className="button" href="/">
         Go Home
       </Link>
+      <SignOut />
     </div>
   );
 }
